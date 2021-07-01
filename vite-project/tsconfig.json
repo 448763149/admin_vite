@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "typeRoots": [
+      "node_modules/@types", // 默认值
+      "src/types"
+    ],
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
+    "types": ["vite/client","node"],
+    "skipLibCheck": true,
+    "baseUrl":".",
+    "paths": {
+      "@/*": [
+          "src/*",
+      ],
+      "@lay/*": [
+        "src/layouts/*",
+      ],
+      "@com/*": [
+        "src/components/*",
+      ],
+      // 根据别名配置相关路径
+      "@utils/*": ["src/utils/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+}

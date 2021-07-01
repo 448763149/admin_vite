@@ -1,0 +1,104 @@
+<!--
+ * @Description: 
+ * @Version: 1.0
+ * @Autor: HuQiang
+ * @Date: 2021-05-17 19:45:40
+ * @LastEditors: HuQiang
+ * @LastEditTime: 2021-06-18 15:47:29
+ * @detail: 
+ * @change: 
+-->
+<template>
+ <!--  -->
+  <a-form  @submit="onSubmit" :model="data" ref="formRef">
+    <a-row :gutter="48">
+      <template v-for="(itme,index) in data.formData" :key="index">
+        <a-col :span="24 / column">
+          <a-form-item 
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+           :label="itme.label" 
+           :rules="itme.rules"
+           :name="itme.key">
+            <component :is="itme.type" :data="itme"></component>
+          </a-form-item>
+        </a-col>
+      </template>
+      <a-col :md="!advanced && 8 || 24" :sm="24">
+        <span class="table-page-search-submitButtons" :style="advanced && { float: 'right', overflow: 'hidden' } || {} ">
+          <a-button type="primary" html-type="submit">查询</a-button>
+          <a-button style="margin-left: 8px" @click="resetForm">重置</a-button>
+          <a @click="toggleAdvanced" style="margin-left: 8px">
+            {{ advanced ? '收起' : '展开' }}
+            <!-- <a-icon :type="advanced ? 'up' : 'down'"/> -->
+          </a>
+        </span>
+      </a-col>
+    </a-row>
+  </a-form>
+</template>
+
+<script lang="ts">
+
+import qwInput from './qw-input.vue';
+import qwSelect from './qw-select.vue';
+import qwInputNumber from './qw-input-number.vue';
+import qwTextarea from './qw-textarea.vue';
+import qwRadioGroup from './qw-radio-group.vue';
+import qwCascader from './qw-cascader.vue';
+import qwCheckboxGroup from './qw-checkbox-group.vue';
+import { defineComponent, reactive, ref, toRaw } from 'vue'
+import { SubmitForm, resetForm, formRef } from '../form'
+
+export default defineComponent({
+  name: 'qwForm',
+  components: {
+    qwInput,
+    qwSelect,
+    qwInputNumber,
+    qwTextarea,
+    qwRadioGroup,
+    qwCascader,
+    qwCheckboxGroup
+  },
+  props: {
+    data: {
+      type: Object,
+      default: () => {}
+    },
+    column: {
+      type: Number,
+      default: 3
+    }
+  },
+  setup(props) {
+    const labelCol = { lg: { span: 5 }, sm: { span: 5 }}
+    const wrapperCol = { lg: { span: 19 }, sm: { span: 19 }}
+
+    const advanced = ref<Boolean>(false)
+    const toggleAdvanced = () => {
+      advanced.value = !advanced.value
+    }
+    const onSubmit = () => {
+      console.log(formRef.value.getFieldsValue())
+      console.log(toRaw(props.data));
+    };
+    const state = reactive(props.data)
+    return { 
+      state,
+      // ...toRaw(state),
+      labelCol,
+      wrapperCol, 
+      advanced, 
+      toggleAdvanced,
+      resetForm,
+      formRef,
+      SubmitForm,
+      onSubmit
+    }
+  }
+});
+</script>
+
+<style scoped>
+</style>
