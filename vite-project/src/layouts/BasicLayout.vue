@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-10 11:12:23
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-06-30 16:05:14
+ * @LastEditTime: 2021-07-13 10:23:07
  * @detail: 
  * @change: 
 -->
@@ -51,8 +51,9 @@
         </div>
       </a-layout-header>
       <div class="m-content">
-        <a-layout-content class="layoutcontent" v-watermark="{text:'全网数商',textColor:'rgba(24,144,255,0.3)'}" :style="{ margin: '24px 16px', padding: '24px' }">
-          <router-view />
+        <a-layout-content class="layoutcontent"  :style="{ margin: '24px 16px', padding: '24px',background:'#fff' }">
+           <div class="m-watermark" v-watermark="{text:'全网数商',textColor:'rgba(24,144,255,0.3)'}"></div>
+           <router-view />
         </a-layout-content>
       </div>
     </a-layout>
@@ -102,7 +103,6 @@ export default defineComponent({
         }
       }
     )
-
     // color 传入颜色值
       // const handleColorChange = (color:string)=> {
       //   console.log(color)
@@ -165,6 +165,17 @@ export default defineComponent({
   overflow-y: auto;
 }
 .layoutcontent{
- min-height: calc(100vh - 115px) !important
+  position: relative;
+  min-height: calc(100vh - 115px) !important
+}
+
+.m-watermark{
+  pointer-events: none;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  z-index: 100000;
+  width: 1396px;
+  bottom:0px;
 }
 </style>
