@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-25 09:46:57
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-06-29 11:01:15
+ * @LastEditTime: 2021-07-13 18:07:37
  * @detail: 
  * @change: 
 -->
@@ -61,6 +61,7 @@
           @click="handleSubmit"
           class="login-button"
           block
+          :loading="loading"
         >登录</a-button>
       </a-form-item>
     </a-form>
@@ -70,14 +71,16 @@
 import { defineComponent,ref,reactive,toRaw } from 'vue'
 import { useRouter } from 'vue-router'
 import hTabs from '@/components/base/h-tabs'
-import {login} from '@/api/common'
+import {useStore} from 'vuex';
 export default defineComponent({
   components:{
     hTabs
   },
   setup() {
     const router = useRouter();
-    const formLogin = ref()
+    const formLogin = ref();
+    const loading = ref<Boolean>(false)
+    const store = useStore();
     const data = reactive({
       tabMapOptions:[{
         label:'账户密码登录',
@@ -91,19 +94,24 @@ export default defineComponent({
       name: '',
       password: undefined,
       checked:false
-     
     });
     const rules = {
       name: [{ required: true, message: '用户名不能为空', trigger: 'blur' }],
       password: [{ required: true, message: '密码不能为空', trigger: 'blur' }],
     };
     const handleSubmit = () =>{
+       loading.value = true
        formLogin.value.validate().then((valid:any) => {
           console.log(valid)
-          login(valid).then((res)=>{
-            router.push('/')
+          store.dispatch('user/login', valid).then((res) => {
+            loading.value = false
+            if(res.code === '0'){
+              // console.log(res)
+              router.push('/')
+            }
           })
        }).catch(() => {
+        loading.value = false
         console.log('error', '表单验证失败');
       });
      
@@ -113,6 +121,7 @@ export default defineComponent({
       formLogin,
       rules,
       formState,
+      loading,
       ...toRaw(data)
     }
   },

@@ -1,24 +1,36 @@
 /*
  * @Description:
  * @version:
- * @Author: YangBo
- * @Date: 2020-09-12 10:53:32
+ * @Author: HuQiang
+ * @Date: 2021-06-12 10:53:32
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-06-29 11:00:26
+ * @LastEditTime: 2021-07-14 09:37:20
  */
-import http from "@/utils/request/index";
+import request from "@/utils/request/request";
 
 // 获取接口公共请求方法
-export function getRequest(api: { url: string, method: string }, par: any) {
-  const params = api.method === 'get' ? { params: par, ...api } : { data: par, ...api }
-  return http.request({
-    ...params
-  })
+export function getRequest(api: { url: string, method: string}, par: any) {
+  // const params = api.method === 'get' ? {...api,params: par} : {...api,data: par }
+  // console.log(params)
+  if (api.method === 'get') {
+    return request({
+      url:api.url,
+      method: "get",
+      params:par
+    })
+  }else{
+    return request({
+      url:api.url,
+      method: "post",
+      data:par
+    })
+  }
+  // return request(params)
 }
 
 // 登录
 export const login = (data: any) => {
-  return http.request({
+  return request({
     url:'/api/users/login',
     method: "post",
     data

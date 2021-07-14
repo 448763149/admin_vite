@@ -1,11 +1,12 @@
 /*
  * @Description: 用户相关数据状态管理
  * @version:
- * @Author: YangBo
- * @Date: 2020-09-19 15:37:44
+ * @Author: HuQiang
+ * @Date: 2021-09-19 15:37:44
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-06-29 11:02:15
+ * @LastEditTime: 2021-07-14 10:13:11
  */
+import { message as Message} from 'ant-design-vue';
 import {login} from '@/api/common'
 import {
   getToken,
@@ -45,23 +46,26 @@ const mutations = {
 const actions = {
   // user login
   login({ commit }: any, loginInfo: any) {
-    return new Promise<void>((resolve, reject) => {
-      login(loginInfo).then(res => {
-          const { data, flag, message } = res;
-          console.log(data);
-          if (flag == "0") { // 登录成功
-              const { accessToken, userId } = data.accessToken;
-              commit("SET_TOKEN", accessToken);
-              setToken(accessToken);
-              // commit("SET_USERID", userId);
-              // setUserId(userId);
-              // commit("SET_USERNAME", name);
-              // setUserName(name);
-              resolve();
-          } else {
-              reject(message);
+    return new Promise((resolve, reject) => {
+      login(loginInfo).then((res:any) => {
+          const { data, code, message } = res;
+          if (code == "0") { // 登录成功
+              const { token, id ,userName} = data;
+              commit("SET_TOKEN", token);
+              setToken(token);
+              commit("SET_USERID", id);
+              setUserId(id);
+              commit("SET_USERNAME", userName);
+              setUserName(userName);
+              resolve(res);
+          } else if(code == "51"){
+            Message.error(message);
+            resolve(res);
+          }else{
+            reject(message);
           }
       }).catch(error => {
+        debugger
           reject(error);
       });
     });

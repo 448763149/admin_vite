@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-05-25 11:02:19
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-06-28 16:24:36
+ * @LastEditTime: 2021-07-14 10:22:45
  * @detail: 
  * @change: 
  */
@@ -13,11 +13,11 @@ var router = express.Router();
 var models = require('../models');
 var Op = models.Sequelize.Op
 /* GET home page. */
-var UUID = require('uuid')
 router.get('/case', async function(req, res, next) {
   var nowPage = parseInt(req.query.nowPage) || 1;
   var pageShow = parseInt(req.query.pageShow) || 10;
   var where = {};
+  
   // 模糊查询标题
   var title = req.query.title;
   if (title) {
@@ -46,7 +46,7 @@ router.get('/case', async function(req, res, next) {
 // 新增
 router.post('/caseAdd', async function (req, res, next) {
   // res.json({'你发送的内容是': req.body});
-  req.body.uuid = UUID.v1()
+  req.body.uuid = getUuid()
   var article = await models.Case.create(req.body)
   res.json(setResult({article: article}));
 });

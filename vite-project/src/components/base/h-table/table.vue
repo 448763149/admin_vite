@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-05-11 11:44:31
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-06-25 09:54:25
+ * @LastEditTime: 2021-07-14 09:28:13
  * @detail: 
  * @change: 
 -->
@@ -52,6 +52,7 @@
 import { toRefs, defineComponent, getCurrentInstance, watch, reactive, computed } from 'vue';
 import { useStore } from 'vuex';
 import { message  } from 'ant-design-vue';
+import {getRequest} from '@/api/common'
 interface stateType {
   loading:boolean,
   nowPage: number,
@@ -98,8 +99,7 @@ export default defineComponent({
     const getTabData = (query:Object = {}) => {
       state.loading = true
       const par = Object.assign(query, { nowPage: state.nowPage, pageShow: state.pageShow })
-      const params = data.query.method === 'get' ? { params: par, ...data.query } : { data: par, ...data.query }
-      axios.request(params).then((res:any) => {
+      getRequest(data.query,par).then((res:any) => {
         state.tableList = res.data?.list || [];
         state.total = res.data?.page?.total
       }).finally(() => {

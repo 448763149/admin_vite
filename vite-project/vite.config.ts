@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-08 16:41:00
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-06-30 15:27:47
+ * @LastEditTime: 2021-07-13 10:32:26
  * @detail: 
  * @change: 
  */
@@ -82,8 +82,8 @@ export default defineConfig({
     open: true,
     proxy: {
       // 字符串简写写法
-      // '/api': 'http://192.168.0.106:3000',
-      '/api': 'http://192.168.4.121:3000',
+      '/api': 'http://192.168.4.122:3000',
+      // '/api': 'http://192.168.4.121:3000',
       // '/api': 'http://192.168.1.104:3000',
       // 选项写法
       // '/api': {
