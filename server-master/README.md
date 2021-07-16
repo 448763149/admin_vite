@@ -4,18 +4,19 @@
  * @Autor: HuQiang
  * @Date: 2021-07-01 14:45:33
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-16 11:42:35
+ * @LastEditTime: 2021-07-16 11:55:56
  * @detail: 
  * @change: 
 -->
 # baseAdmin
 
 ### 启动项目
-npm i
-npm start
+- npm i
+- npm start
 
 
 #### 数据库说明  
+```html
 |-- server-master
     |-- README.md
     |-- api         接口逻辑
@@ -28,7 +29,7 @@ npm start
         |-- sysoper            会员表
         |-- sysoperrolerel     会员角色表
         |-- sysrole            角色表
-
+```
 
 ##### 本示例使用的公钥与私钥可自己生成，操作如下：
 1. 打开命令行工具，输入openssl，打开openssl;
