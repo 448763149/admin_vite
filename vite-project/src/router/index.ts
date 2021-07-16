@@ -4,14 +4,20 @@
  * @Autor: HuQiang
  * @Date: 2021-06-09 09:37:09
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-06-25 16:59:18
+ * @LastEditTime: 2021-07-16 16:48:04
  * @detail: 
  * @change: 
  */
 import { createRouter, createWebHistory,RouteRecordRaw } from 'vue-router'
 import { BasicLayout,RouteView, UserLayout } from '@lay/index'
-const routes: Array<RouteRecordRaw> = [
-  
+
+
+
+// 各模块菜单引入
+import sys from "./modules/sys";
+
+// 默认不需要进行身份校验均可访问的路由
+const constantRouters: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'index',
@@ -60,16 +66,28 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
-    path: '/:pathMatch(.*)*',
+    // path: '/:pathMatch(.*)*',
+    path: '/404',
     name: '404',
     meta: { title: '404' },
     component: () => import(/* webpackChunkName: "fail" */ '@/pages/404.vue')
   }
 ]
+
+
+// 动态路由，校验用户权限后动态匹配的路由
+export const asyncRoutes:Array<RouteRecordRaw> = [
+  sys
+]
+
 // new 转换成工厂函数
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  //使用前端路由，当切换到新路由时，想要页面骏到顶部，或者是保持原先的滚动位置，就像重新加
+  scrollBehavior: () => ({top: 0,left:0}),
+  routes:constantRouters
 })
+
+
 
 export default router

@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-05-11 11:44:31
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-14 09:28:13
+ * @LastEditTime: 2021-07-16 18:10:40
  * @detail: 
  * @change: 
 -->
@@ -70,6 +70,10 @@ export default defineComponent({
       type: Object,
       default: () => {}
     },
+    tableList: {
+      type: Object,
+      default: () => []
+    },
     form: {
       type: Object,
       default: () => {}
@@ -106,8 +110,13 @@ export default defineComponent({
         state.loading = false
       })
     }
-   
-    getTabData()
+    // 有接口展示接口信息如果没有接口
+    if(data.query && data.query.url){
+      getTabData()
+    }else{
+      state.loading = false
+    }
+    
     
     watch(() => { return props.tableData.loading; }, 
       (state) => { console.log(state); }, {

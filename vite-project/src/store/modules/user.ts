@@ -4,7 +4,7 @@
  * @Author: HuQiang
  * @Date: 2021-09-19 15:37:44
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-14 10:13:11
+ * @LastEditTime: 2021-07-16 15:24:40
  */
 import { message as Message} from 'ant-design-vue';
 import {login} from '@/api/common'
@@ -65,7 +65,6 @@ const actions = {
             reject(message);
           }
       }).catch(error => {
-        debugger
           reject(error);
       });
     });
@@ -91,7 +90,7 @@ const actions = {
       removeToken();
       commit("SET_USERID", "");
       removeUserId();
-      // resolve();
+      resolve('');
     });
   }
 };

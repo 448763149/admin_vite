@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-10 11:12:16
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-06-21 18:03:17
+ * @LastEditTime: 2021-07-16 14:01:59
  * @detail: 
  * @change: 
  */
@@ -49,5 +49,18 @@ export const data = reactive<MenuProps>({
       title: '解决方案',
       icon:"UserOutlined",
     }
+  },{
+    path:'/sys',
+    meta:{
+      title: '系统管理',
+      icon:"UserOutlined",
+    },
+    children:[
+      { 
+        path: '/sys/menu',
+        name: 'case',
+        meta: { title: '菜单' },
+      }
+    ]
   }]
 })
