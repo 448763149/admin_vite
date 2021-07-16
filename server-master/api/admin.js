@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-05-12 15:06:08
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-13 17:19:20
+ * @LastEditTime: 2021-07-16 09:56:37
  * @detail: 
  * @change: 
  */
@@ -14,13 +14,13 @@ var Op = models.Sequelize.Op
 
 // 登录接口
 const loginIn = async (ctx,res, next) => {
-  const user = ctx.body
-  const data = await models.User.findOne({
+  const sysoper = ctx.body
+  const data = await models.SysOper.findOne({
     where: {
-      userName: {
-        [Op.eq]: `${user.name}`
+      loginName: {
+        [Op.eq]: `${sysoper.name}`
       },
-      password: user.password
+      pwd: sysoper.password
     }
   })
   if(data){
