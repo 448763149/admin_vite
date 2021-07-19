@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-05-11 11:44:31
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-16 18:10:40
+ * @LastEditTime: 2021-07-19 09:50:12
  * @detail: 
  * @change: 
 -->
@@ -70,10 +70,6 @@ export default defineComponent({
       type: Object,
       default: () => {}
     },
-    tableList: {
-      type: Object,
-      default: () => []
-    },
     form: {
       type: Object,
       default: () => {}
@@ -114,6 +110,7 @@ export default defineComponent({
     if(data.query && data.query.url){
       getTabData()
     }else{
+      state.tableList = props.tableData.tableList
       state.loading = false
     }
     

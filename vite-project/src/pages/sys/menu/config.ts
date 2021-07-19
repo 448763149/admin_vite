@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-16 09:39:20
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-16 18:01:26
+ * @LastEditTime: 2021-07-19 11:55:03
  * @detail: 
  * @change: 
  */
@@ -113,39 +113,26 @@ const PageConfig = reactive({
     ]
   },
   table: {
-    columns: [
+    columns:[
       {
-        title: '名称',
-        width: '20%',
-        ellipsis: true,
-        dataIndex: 'title',
-        key: 'title',
-        // fixed: 'left',
+        title: '菜单名称',
+        key: 'name',
+        dataIndex: 'name'
       },
       {
-        title: '描述', ellipsis: true,
-        dataIndex: 'content', 
-        key: 'content', 
-        width: '40%',
+        title: '菜单链接',
+        key: 'age',
+        dataIndex: 'age'
       },
       {
-        title: '标签', ellipsis: true, 
-        dataIndex: 'labelList', 
-        key: 'labelList',
-        width: '20%',
+        title: '上级菜单',
+        key: 'address',
+        dataIndex: 'address'
       },
       {
-        title: '图片',
-        ellipsis: true,
-        key: 'url',
-        width: '20%',
-        // slots: { customRender: 'url' },
-        customRender: ({ text }:any) => {
-          return {
-            children: h('div',{ class: 'm-img' }, [h('img',{ src: text.url }, text)]),
-            props: {},
-          };
-        }
+        title: '是否显示',
+        dataIndex: 'address',
+        key: 'address',
       },
       {
         title: '操作',
@@ -161,7 +148,7 @@ const PageConfig = reactive({
         label:"新增",
         type:'link',// 跳转的类型
         key:'ADD',
-        link:'/case/add'
+        link:'/sys/menu/add'
       }
     ],
     tableListBus: [
@@ -178,6 +165,71 @@ const PageConfig = reactive({
         label:'删除'
       }
     ],
+    tableList:[
+      {
+        key: 1,
+        name: 'John Brown sr.',
+        age: 60,
+        address: 'New York No. 1 Lake Park',
+        children: [
+          {
+            key: 11,
+            name: 'John Brown',
+            age: 42,
+            address: 'New York No. 2 Lake Park',
+          },
+          {
+            key: 12,
+            name: 'John Brown jr.',
+            age: 30,
+            address: 'New York No. 3 Lake Park',
+            children: [
+              {
+                key: 121,
+                name: 'Jimmy Brown',
+                age: 16,
+                address: 'New York No. 3 Lake Park',
+              },
+            ],
+          },
+          {
+            key: 13,
+            name: 'Jim Green sr.',
+            age: 72,
+            address: 'London No. 1 Lake Park',
+            children: [
+              {
+                key: 131,
+                name: 'Jim Green',
+                age: 42,
+                address: 'London No. 2 Lake Park',
+                children: [
+                  {
+                    key: 1311,
+                    name: 'Jim Green jr.',
+                    age: 25,
+                    address: 'London No. 3 Lake Park',
+                  },
+                  {
+                    key: 1312,
+                    name: 'Jimmy Green sr.',
+                    age: 18,
+                    address: 'London No. 4 Lake Park',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        key: 2,
+        name: 'Joe Black',
+        age: 32,
+        address: 'Sidney No. 1 Lake Park',
+      },
+    ]
+    
     // query: {
     //   url: '/api/qw/case',
     //   method: 'get'

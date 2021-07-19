@@ -4,28 +4,26 @@
  * @Autor: HuQiang
  * @Date: 2021-06-09 09:39:40
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-19 09:48:11
+ * @LastEditTime: 2021-06-23 16:07:34
  * @detail: 
  * @change: 
 -->
 <template>
   <div>
-    <h-table :tableData="table" :form="form"></h-table>
+    <h-crumbs></h-crumbs>
+    <h-form :data="form" :column="1"></h-form>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent, toRefs } from 'vue'
-// import { useStore } from 'vuex'
+import { defineComponent,  toRefs } from 'vue'
 import baseData from './config'
 export default defineComponent({
   name: 'App',
   components: {
-    hTable: defineAsyncComponent(() =>
-      import('@/components/base/h-table/table.vue')
-    )
   },
-  async setup() {
+  setup() {
+    
     return { ...toRefs(baseData) }
   }
 })

@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-19 22:23:16
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-06-23 16:15:34
+ * @LastEditTime: 2021-07-19 15:00:57
  * @detail: 
  * @change: 
  */
@@ -17,7 +17,10 @@ const hCrumbs = defineComponent({
     const router: Router = useRouter();
     const currentRoute = router.currentRoute.value
     const title = currentRoute.meta.title
-    const parentRouter = getParent(router.options.routes,'/case/add')
+    console.log(currentRoute)
+    console.log(router.options.routes)
+    const parentRouter = getParent(router.getRoutes(),currentRoute.path)
+    console.log(parentRouter)
     return () => (
       <a-breadcrumb style={'marginBottom:50px'} separator="">
         <a-breadcrumb-item href="/">

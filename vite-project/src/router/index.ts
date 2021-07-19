@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-09 09:37:09
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-16 16:48:04
+ * @LastEditTime: 2021-07-19 11:58:13
  * @detail: 
  * @change: 
  */
@@ -15,9 +15,10 @@ import { BasicLayout,RouteView, UserLayout } from '@lay/index'
 
 // 各模块菜单引入
 import sys from "./modules/sys";
-
+console.log(sys)
 // 默认不需要进行身份校验均可访问的路由
 const constantRouters: Array<RouteRecordRaw> = [
+ 
   {
     path: '/',
     name: 'index',
@@ -71,13 +72,14 @@ const constantRouters: Array<RouteRecordRaw> = [
     name: '404',
     meta: { title: '404' },
     component: () => import(/* webpackChunkName: "fail" */ '@/pages/404.vue')
-  }
+  },
+  
 ]
 
 
 // 动态路由，校验用户权限后动态匹配的路由
 export const asyncRoutes:Array<RouteRecordRaw> = [
-  sys
+  sys,
 ]
 
 // new 转换成工厂函数

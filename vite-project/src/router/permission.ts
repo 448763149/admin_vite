@@ -4,7 +4,7 @@
  * @Author: YangBo
  * @Date: 2020-09-29 15:19:44
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-16 17:56:37
+ * @LastEditTime: 2021-07-19 14:08:15
  */
 import router from "@/router";
 import store from "@/store";
@@ -15,39 +15,47 @@ import {getToken} from "@/utils/auth"; // get token from cookie
 
 
 const whiteList = ["/login"]; // 免登录白名单页面
-router.beforeEach(async (to, from) => {
+router.beforeEach(async (to, from,next) => {
 	NProgress.start();
 	// determine whether the user has logged in
 	const hasToken = getToken();
 	if (hasToken) {
 		if (to.path === "/login") {
 			NProgress.done();
-			return true;
+			// return true;
+			next()
 		} else {
 			const hasAuths = store.getters.hasAuths;
 			if (hasAuths) {
-				return true;
+				// return true;
+				next()
 			} else {
 				try {
-						if (hasRoute(to)) {
-							const accessRoutes = await store.dispatch("permission/generateRoutes");
-							 const result = generateRoute(to, accessRoutes);
-							// result.flag 判断是否有匹配到的路由, false则跳转到404页面
-							if (result.flag) { 
-								router.addRoute(result.route);
-								return to.fullPath;
-							} else {
-								return "/404";
-							}
-						}else{
-							// 如果路由存在
-							return true;
-						}
+					const accessRoutes = await store.dispatch("permission/generateRoutes");
+					accessRoutes.map((item:any)=>{
+						router.addRoute(item)
+					})
+					next({ ...to, replace: true })
+						// if (hasRoute(to)) {
+						// 	const accessRoutes = await store.dispatch("permission/generateRoutes");
+						// 	 const result = generateRoute(to, accessRoutes);
+						// 	// result.flag 判断是否有匹配到的路由, false则跳转到404页面
+						// 	if (result.flag) { 
+						// 		router.addRoute(result.route);
+						// 		return to.fullPath;
+						// 	} else {
+						// 		return "/404";
+						// 	}
+						// }else{
+						// 	// 如果路由存在
+						// 	return true;
+						// }
 				} catch (error) {
 		  		// remove token and go to login page to re-login
 					await store.dispatch("user/resetToken");
 					NProgress.done();
-					return `/login?redirect=${to.path}`
+					next(`/login?redirect=${to.path}`)
+					// return `/login?redirect=${to.path}`
 				}
 			}
 		}
@@ -55,10 +63,12 @@ router.beforeEach(async (to, from) => {
 		/* has no token*/
 		if (whiteList.indexOf(to.path) !== -1) {
 			// in the free login whitelist, go directly
-			return true;
+			// return true;
+			next()
 		} else {
 			NProgress.done();
-			return `/login?redirect=${to.path}`
+			// return `/login?redirect=${to.path}`
+			next(`/login?redirect=${to.path}`)
    	}
 	}
 });

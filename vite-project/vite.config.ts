@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-08 16:41:00
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-16 09:59:08
+ * @LastEditTime: 2021-07-19 09:37:28
  * @detail: 
  * @change: 
  */
@@ -84,7 +84,7 @@ export default defineConfig({
       // 字符串简写写法
       '/api': 'http://192.168.4.121:3000',
       // '/api': 'http://192.168.4.121:3000',
-      // '/api': 'http://192.168.1.104:3000',
+      // '/api': 'http://192.168.0.106:3000',
       // 选项写法
       // '/api': {
       //   target: 'http://localhost:3000',

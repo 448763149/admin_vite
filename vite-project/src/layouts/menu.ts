@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-10 11:12:16
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-16 14:01:59
+ * @LastEditTime: 2021-07-19 11:55:30
  * @detail: 
  * @change: 
  */
@@ -57,7 +57,7 @@ export const data = reactive<MenuProps>({
     },
     children:[
       { 
-        path: '/sys/menu',
+        path: '/sys/menu/list',
         name: 'case',
         meta: { title: '菜单' },
       }
