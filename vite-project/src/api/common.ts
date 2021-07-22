@@ -4,7 +4,7 @@
  * @Author: HuQiang
  * @Date: 2021-06-12 10:53:32
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-14 09:37:20
+ * @LastEditTime: 2021-07-21 15:40:31
  */
 import request from "@/utils/request/request";
 
@@ -32,6 +32,18 @@ export function getRequest(api: { url: string, method: string}, par: any) {
 export const login = (data: any) => {
   return request({
     url:'/api/users/login',
+    method: "post",
+    data
+  })
+}
+
+
+
+
+// 获取页面属性
+export const getPlateAllMenu = (data?: any) => {
+  return request({
+    url:'/api/sys/getPlateAllMenu',
     method: "post",
     data
   })

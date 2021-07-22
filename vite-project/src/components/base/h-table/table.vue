@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-05-11 11:44:31
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-19 09:50:12
+ * @LastEditTime: 2021-07-21 14:12:01
  * @detail: 
  * @change: 
 -->
@@ -18,7 +18,6 @@
     :header="columns"
     v-bind="$attrs">
     </h-query>
-    <!-- <search :data="form" /> -->
     <div class="table-page">
       <a-table :size="store.getters.getsize"
         :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }" 
@@ -35,7 +34,8 @@
           showTotal: (total,range) => `共${total}条`,
           onShowSizeChange:onChange,
           onChange
-        }" :scroll="{ x: 1500, y: 'auto' }">
+        }" >
+        <!-- :scroll="{ x: 1500, y: 'auto' }" -->
         <slot>
         </slot>
         <template #action = "{ record }">
@@ -139,9 +139,7 @@ export default defineComponent({
     const handleBus = (data:any,record:any) =>{
       if(data.type === 'delete'){
         const par ={ id: record.id}
-        const params = data.api.method === 'get' ? { params: par, ...data.api } : { data: par, ...data.api }
-        console.log(params)
-        axios.request(params).then((res:any) => {
+        getRequest(data.api,par).then((res:any) => {
           message.success('删除成功！！')
           getTabData()
         })

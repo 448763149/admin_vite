@@ -5,7 +5,7 @@
  * @Autor: HuQiang
  * @Date: 2021-05-25 11:02:19
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-14 10:43:02
+ * @LastEditTime: 2021-07-21 16:35:12
  * @detail: 
  * @change: 
  */
@@ -13,6 +13,7 @@ const fs = require('fs');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const UUID = require('uuid')
+const moment = require('moment');
 /* 接口统一返回格式 */
 global.setResult = function(data=null,code='0',message='success'){
   return{
@@ -91,4 +92,35 @@ global.headersCookie = function(cookieStr,){
     });
   }
   return Cookies['Admin-Token']
+}
+
+
+/**
+* 获取时间
+*/
+global.getTime = function(){
+  return moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')
+}
+
+
+
+/**
+ * 对象数据深拷贝
+ * @param  {Object || Array}     obj     要深拷贝的对象
+ * @return {Object || Array}             返回深拷贝后的对象
+ */
+ global.deepCopy = function (obj) {
+  console.log(obj)
+	// 如果深拷贝数据不是对象类型则直接返回原数据
+	if(obj == null || typeof obj !== "object") return obj;
+
+	var result = Array.isArray(obj) ? [] : {};
+
+	for(var key in obj) {
+		// eslint-disable-next-line no-prototype-builtins
+		if(obj.hasOwnProperty(key)) {
+			result[key] = typeof obj[key] == "object" ? deepCopy(obj[key]) : obj[key];
+		}
+	}
+	return result;
 }

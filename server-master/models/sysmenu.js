@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-07-15 17:34:17
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-15 17:38:18
+ * @LastEditTime: 2021-07-21 14:51:45
  * @detail: 
  * @change: 
  */
@@ -24,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     delFlag: DataTypes.STRING,
     opeTime: DataTypes.STRING,
     oper: DataTypes.STRING,
-    uuid: DataTypes.STRING
+    menu_id: DataTypes.STRING,
+    parent_id:DataTypes.STRING
   }, {});
   return SysMenu;
 };

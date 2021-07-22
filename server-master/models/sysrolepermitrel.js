@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-07-15 17:34:21
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-16 09:34:22
+ * @LastEditTime: 2021-07-21 17:34:09
  * @detail: 
  * @change: 
  */
@@ -19,7 +19,10 @@ module.exports = (sequelize, DataTypes) => {
     opeTime: DataTypes.STRING,
     oper: DataTypes.STRING,
     uuid: DataTypes.STRING
-  }, {});
+  },{
+    // 用来设置字段以外的其他信息
+   timestamps:false
+ });
   return SysOperPermitRel;
 };
 

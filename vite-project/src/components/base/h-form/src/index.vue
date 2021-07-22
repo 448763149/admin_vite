@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-05-17 19:45:40
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-06-29 12:00:14
+ * @LastEditTime: 2021-07-21 17:42:46
  * @detail: 
  * @change: 
 -->
@@ -62,6 +62,7 @@ export default defineComponent({
     hCascader:defineAsyncComponent(() => import('./h-cascader.vue')),
     hCheckboxGroup:defineAsyncComponent(() => import('./h-checkbox-group.vue')),
     hUpload:defineAsyncComponent(() => import('./h-upload.vue')),
+    hIconDialog:defineAsyncComponent(() => import('../../h-iconDialog/src/index.vue')),
   },
   props: {
     data: {
@@ -98,12 +99,12 @@ export default defineComponent({
             valid[key] = valid[key].join()
           }
         }
+        console.log(valid)
         getRequest(value.api,valid).then((res)=>{
           message.success('新增成功')
           setTimeout(() => {
             router.go(-1)
           }, 1000);
-          
         })
       }).catch(() => {
         console.log('error', '表单验证失败');

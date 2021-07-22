@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-10 16:31:08
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-19 09:39:43
+ * @LastEditTime: 2021-07-20 16:28:51
  * @detail: 
  * @change: 
  */
@@ -29,3 +29,6 @@ export function watermark(app:any){
     addWaterMarker(binding.value.text, el, binding.value.font, binding.value.textColor)
   })
 }
+
+
+

@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-05-17 19:45:40
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-06-23 16:11:21
+ * @LastEditTime: 2021-07-21 17:39:08
  * @detail: 
  * @change: 
 -->
@@ -18,6 +18,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import {getRequest} from '@/api/common'
 export default defineComponent({
   name: 'hCascader',
   components: {},
@@ -32,8 +33,13 @@ export default defineComponent({
     }
    
   },
-  setup() {
-    
+  setup(props) {
+    let data = props.data
+    if(data && data.query){
+      getRequest(data.query,'').then((res:any) => {
+        data.options = res.data.list
+      })
+    }
   }
 });
 </script>

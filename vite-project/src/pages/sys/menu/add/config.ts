@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-16 09:39:20
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-19 15:08:51
+ * @LastEditTime: 2021-07-21 17:44:56
  * @detail: 
  * @change: 
  */
@@ -26,7 +26,7 @@ const PageConfig = reactive({
         bustype:'primary',// link primary Default danger
         key:'submit',
         api: {
-          url: '/api/qw/caseAdd',
+          url: '/api/sys/menuAdd',
           method: 'post'
         }
       }
@@ -46,7 +46,7 @@ const PageConfig = reactive({
       },
       {
         type: 'hRadioGroup',
-        key: 'type',
+        key: 'menuType',
         label: '菜单类型',
         value: '1', 
         placeholder: '',
@@ -62,23 +62,16 @@ const PageConfig = reactive({
         ]
       },
       {
-        type: 'hSelect',
-        key: 'select',
-        label: '业务域',
+        type: 'hIconDialog',
+        key: 'iconCssName',
+        label: '菜单图标',
         value: '', 
         placeholder: '',
-        multiple: '',
-        apiUrl: "",
-        disabled: false,
-        options: [
-          {
-            value: "",
-            label: "请选择",
-            key: "state",
-            children: [],
-          }
-        ],
-        rules: []
+        disabled: true,
+        required:false,
+        rules: [
+          { required: true, message: '请选择菜单图标',trigger: 'change' }
+        ]
       },
       {
         type: 'hInput',
@@ -94,15 +87,51 @@ const PageConfig = reactive({
       },
       {
         type: 'hInput',
-        key: 'iconCssName',
-        label: '菜单图标',
+        key: 'showIndex',
+        label: '显示顺序',
         value: '', 
         placeholder: '',
         disabled: false,
         required:false,
         rules: [
-          { required: true, message: '请输入菜单图标', trigger: 'blur' }
+          { required: true, message: '请输入显示顺序', trigger: 'blur' }
         ]
+      },
+      {
+        type: 'hRadioGroup',
+        key: 'state',
+        label: '菜单状态',
+        value: '1', 
+        placeholder: '',
+        disabled: false,
+        required:false,
+        isVertical:false, // 展示方式
+        options: [
+          { label: '启用', value: '1' },
+          { label: '不启动', value: '2' },
+        ]
+      },
+      {
+        type: 'hCascader',
+        key: 'parent_id',
+        label: '父级菜单',
+        value: [], 
+        placeholder: '',
+        multiple: '',
+        disabled: false,
+        options: [
+          {
+            value: "",
+            label: "请选择",
+            key: "state",
+            children: [],
+          }
+        ],
+        query: {
+          url: '/api/sys/getPlateAllMenu',
+          method: 'post'
+        },
+        rules: []
       },
     ]
   }

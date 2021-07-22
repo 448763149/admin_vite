@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-16 09:39:20
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-06-23 16:55:40
+ * @LastEditTime: 2021-07-21 18:03:05
  * @detail: 
  * @change: 
  */
@@ -141,9 +141,18 @@ const PageConfig = reactive({
         width: '20%',
         // slots: { customRender: 'url' },
         customRender: ({ text }:any) => {
+          // const deletekk = ()=>{
+          //   console.log(1111)
+          // }
+          // onclick:deletekk
           return {
-            children: h('div',{ class: 'm-img' }, [h('img',{ src: text.url }, text)]),
+            children: h('div',{ class: 'm-img', }, [h('img',{ src: text.url }, text)]),
             props: {},
+            on:{
+              kkk:()=>{
+                
+              }
+           }
           };
         }
       },

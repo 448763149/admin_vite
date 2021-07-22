@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-15 15:24:08
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-06-22 11:09:28
+ * @LastEditTime: 2021-07-21 14:58:06
  * @detail: 
  * @change: 
  */
@@ -101,3 +101,15 @@ export function getParent(router:any[], path:string) {
 
 
 
+/**
+ * 判断对象是否为空
+ * @param  {object} obj 需要判断的对象
+ * @return {Boolean} 返回当前
+ * @Autor HuQiang 2021-5-11 15:17
+ */
+ export function isEmptyObject(obj:object){  
+  for(var key in obj){  
+    break;  return false  
+  };  
+  return true  
+}; 

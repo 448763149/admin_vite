@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-05-25 11:02:19
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-14 10:21:03
+ * @LastEditTime: 2021-07-20 17:26:00
  * @detail: 
  * @change: 
  */
@@ -16,6 +16,7 @@ module.exports = function (app) {
   app.use('/api/base', checkAuth,require('./base'))
   app.use('/api/qw', checkAuth,require('./case'))
   app.use('/api/users',require('./users'))
+  app.use('/api/sys',require('./menu'))
 //socket
   // app.use('/socket', require('./socketRouter'));
  // catch 404 and forward to error handler
