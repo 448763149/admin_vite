@@ -16,7 +16,8 @@
     "nprogress": "^0.2.0",
     "vue": "^3.0.5",
     "vue-router": "^4.0.8",
-    "vuex": "^4.0.1"
+    "vuex": "^4.0.1",
+    "wangeditor": "^4.7.5"
   },
   "devDependencies": {
     "@types/js-cookie": "^2.2.6",

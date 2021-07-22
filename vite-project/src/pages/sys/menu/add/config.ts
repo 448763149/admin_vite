@@ -73,6 +73,17 @@ const PageConfig = reactive({
           { required: true, message: '请选择菜单图标',trigger: 'change' }
         ]
       },
+			{
+			  type: 'hUeditor',
+			  key: 'Ueditor',
+			  label: '富文本',
+			  value: '', 
+			  placeholder: '',
+			  disabled: true,
+			  required:false,
+			  rules: [
+			  ]
+			},
       {
         type: 'hInput',
         key: 'menuPath',

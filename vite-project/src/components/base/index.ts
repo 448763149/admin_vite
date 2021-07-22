@@ -15,13 +15,19 @@ import hForm from './h-form'
 import hQuery from './h-query'
 import hCrumbs from './h-crumbs'
 import hHhelloworld from './helloworld'
+import hIconDialog from './h-IconDialog'
+import hUeditor from './h-ueditor'
+import hTree from './h-tree'
  
 // 存储组件列表
 const components = [
   hForm,
   hQuery,
   hHhelloworld,
-  hCrumbs
+  hCrumbs,
+	hIconDialog,
+	hUeditor,
+	hTree
 ]
  
 // 定义 install 方法，接收 app 作为参数。如果使用 use 注册插件，则所有的组件都将被注册

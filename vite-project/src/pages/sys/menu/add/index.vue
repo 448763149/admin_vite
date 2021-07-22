@@ -23,7 +23,6 @@ export default defineComponent({
   components: {
   },
   setup() {
-    
     return { ...toRefs(baseData) }
   }
 })
