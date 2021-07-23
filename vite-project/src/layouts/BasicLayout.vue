@@ -10,129 +10,28 @@
 -->
 <template>
   <a-layout>
-    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible>
-      <div class="logo">
-        <h1>huqiang</h1>
-      </div>
-      <a-menu theme="dark"
-      mode="inline" 
-      v-model:selectedKeys="selectedKeys"
-       @click="handlemenus"
-       v-model:openKeys="openKeys"
-      >
-        <template v-for="(item,index) in menus" :key="item.path">
-          <template v-if="item.children && item.children.length > 0">
-            <a-sub-menu :key="item.path" v-for="(sub,index) in item.children">
-              <template #title>
-                <span>
-                  <AppstoreOutlined />
-                  <span>{{ item.meta.title }}</span>
-                </span>
-              </template>
-              <a-menu-item :key="sub.path">
-                {{sub.meta.title}}
-              </a-menu-item>
-            </a-sub-menu>
-          </template>
-          <template v-else>
-            <a-menu-item :key="item.path">
-              <AppstoreOutlined />
-              <span>{{ item.meta.title }}</span>
-            </a-menu-item>
-          </template>
-        </template>
-      </a-menu>
-    </a-layout-sider>
-    <a-layout>
-      <a-layout-header style="background: #fff; padding: 0">
-        <div class="h-header-trigger">
-          <menu-unfold-outlined v-if="collapsed" class="trigger" @click="() => (collapsed = !collapsed)" />
-          <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
-        </div>
-      </a-layout-header>
-      <div class="m-content">
-        <a-layout-content class="layoutcontent"  :style="{ margin: '24px 16px', padding: '24px',background:'#fff' }">
-           <div class="m-watermark" v-watermark="{text:'全网数商',textColor:'rgba(24,144,255,0.3)'}"></div>
-           <router-view />
-        </a-layout-content>
-      </div>
-    </a-layout>
+    <h-lay-left :collapsed="collapsed" />
+    <h-lay-top :collapsed="collapsed" @topChange="collChange" />
   </a-layout>
 </template>
 <script lang="ts">
-import {
-  AppstoreOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined
-} from '@ant-design/icons-vue';
-import { defineComponent, onMounted,watch, ref, toRefs } from 'vue';
-import { data } from './menu'
-import { useRouter } from 'vue-router'
-import {getisRoute} from '@/utils/utils'
+import { defineComponent, ref } from 'vue';
+import HLayLeft from './components/h-layLeft.vue'
+import HLayTop from './components/h-layTop.vue';
 export default defineComponent({
   name: 'BasicLayout',
   components: {
-    UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-    AppstoreOutlined
-  },
+    HLayLeft,
+    HLayTop
+  }, 
   setup() {
-    const router = useRouter();
-    let curRoute = ref<string[]>([])
-    const openKeys = ref<string[]>([]);
-    let arr:any = router.currentRoute.value.path.match(/^(\/\w+)/g)
-    openKeys.value = [arr[0]]
-    // 导航跳转
-    const handlemenus = (item:any) => {
-      localStorage.setItem("getRouter", item.key);
-      curRoute.value = [item.key]
-      router.push(item.key)
+    let collapsed=ref<boolean>(false);
+    const collChange = (item:any) => {
+      collapsed.value=item
     }
-    // 监听路由变化修改选中效果
-    watch(() => router.currentRoute.value.path,(val) => {
-      let isRouter = getisRoute(data.menus,val)
-        if(isRouter){
-          localStorage.setItem("getRouter", val);
-          curRoute.value = [val]
-        }
-      }
-    )
-    // color 传入颜色值
-      // const handleColorChange = (color:string)=> {
-      //   console.log(color)
-      //   console.log(window.less)
-      //     window.less.modifyVars({  // 调用 `less.modifyVars` 方法来改变变量值'
-      //        "@primary-color":color
-      //       }).then(() => {
-      //       console.log('修改成功');
-      //     });
-      // }
-    // watch(() => openKeys,val => {
-    //     console.log('openKeys', val);
-    //   },
-    // )
-    onMounted(() => {
-      const getRouter:any = localStorage.getItem("getRouter");
-      if(router.currentRoute.value.path === getRouter){
-        curRoute.value = [getRouter]
-      }else{
-        curRoute.value = [router.currentRoute.value.path]
-        localStorage.setItem("getRouter", router.currentRoute.value.path);
-      }
-    })
-   
     return {
-      handlemenus,
-      openKeys,
-      ...toRefs(data),
-      selectedKeys:curRoute,
-      collapsed: ref<boolean>(false)
+      collChange,
+      collapsed
     };
   }
 });
