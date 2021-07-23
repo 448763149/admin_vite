@@ -4,8 +4,8 @@
             <div class="h-header-trigger">
                 <menu-unfold-outlined v-if="collapsed" class="trigger" @click="collapsedChange" />
                 <menu-fold-outlined v-else class="trigger" @click="collapsedChange" />
-                <RedoOutlined style="margin-left: 30px" @click="checkedView" />
-                <FullscreenOutlined class="FullscreenOutlined" @click="clickFullscreen" />
+                <h-out-line @showViewChange="showViewChange" />
+                <h-full-screen />
             </div>
         </a-layout-header>
         <div class="m-content">
@@ -25,8 +25,8 @@
 
 <script lang="ts">
 import { defineComponent, ref, nextTick } from 'vue';
-import { message } from 'ant-design-vue';
-import screenfull from 'screenfull';
+import hFullScreen from './h-fullScreen.vue';
+import hOutLine from './h-outLine.vue';
 import {
     AppstoreOutlined,
     UserOutlined,
@@ -47,35 +47,29 @@ export default defineComponent({
         MenuFoldOutlined,
         AppstoreOutlined,
         RedoOutlined,
-        FullscreenOutlined
+        FullscreenOutlined,
+        hFullScreen,
+        hOutLine
     },
     setup(props, vm) {
         let collapsed = ref<boolean>(false);
-        const spinning = ref<boolean>(false);
         const showView = ref<boolean>(true);
         const collapsedChange = () => {
             collapsed.value = !collapsed.value;
             vm.emit('topChange', collapsed.value);
         };
-        const checkedView = () => {
-            showView.value = false;
+        const showViewChange = (item:any) => {
+            showView.value=item;
             nextTick(() => {
                 showView.value = true;
             });
         };
-        const clickFullscreen = () => {
-            if (!screenfull.isEnabled) {
-                message.error('当前不允许全屏');
-                return false;
-            }
-            screenfull.toggle();
-        };
+
         return {
             collapsed,
             showView,
             collapsedChange,
-            clickFullscreen,
-            checkedView
+            showViewChange
         };
     }
 });
@@ -85,12 +79,5 @@ export default defineComponent({
     width: 100%;
     cursor: auto;
     position: relative;
-    .FullscreenOutlined {
-        position: absolute;
-        right: 60px;
-        top: 22px;
-        height: 20px;
-        cursor: pointer;
-    }
 }
 </style>
