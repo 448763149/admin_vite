@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-05-12 15:06:08
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-21 17:37:47
+ * @LastEditTime: 2021-07-22 17:34:06
  * @detail: 
  * @change: 
  */
@@ -43,31 +43,28 @@ const menuTree = async (req,res, next) => {
   let list = []
   if(result.rows && result.rows.length > 0){
     result.rows.map(itme=>{
-      if(itme.parent_id == '0'){
         list.push(itme)
-      }
     })
   }
   list = getsort(list,'showIndex')
+  list = turnToTreeOfManyRootPlus(list)
   res.json(setResult({list:list}));
 }
 
 // 获取菜单管理
 const getPlateAllMenu = async (req,res, next) => {
   const result = await models.SysMenu.findAll();
-  console.log(result)
   let list = []
   let data = result
   if(data && data.length > 0){
     data.forEach(itme=>{
       itme.dataValues['label'] = itme.name
       itme.dataValues['value'] = itme.menu_id
-      if(itme.parent_id == '0'){
-        list.push(itme)
-      }
+      list.push(itme)
     })
   }
   list = getsort(list,'showIndex')
+  list = turnToTreeOfManyRootPlus(list)
   res.json(setResult({list:list}));
 }
 /* 
@@ -81,6 +78,36 @@ function getsort(list,showIndex){
     else return 0
   })
   return list
+}
+
+
+function turnToTreeOfManyRootPlus(arr) {
+  var arrs = []
+  arr.forEach(item => {
+    if (item.parent_id == '0') {
+      arrs.push(item)
+    }
+  })
+
+  return arr.reduce((h, m) => {
+    if (m.parent_id != '0') {
+      foo(h, m)
+    }
+    function foo(arr, cur) {
+      arr.forEach(item => {
+        if (item.menu_id === cur.parent_id) {
+          if (!item.children) {
+            item.dataValues['children'] = []
+          }
+          item.dataValues.children.push(cur)
+        } else if (item.dataValues.children) {
+          foo(item.dataValues.children, cur)
+        }
+      })
+    }
+
+    return h
+  }, arrs)
 }
 
 module.exports = {

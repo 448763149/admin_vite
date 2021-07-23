@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-05-17 19:45:40
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-21 17:42:46
+ * @LastEditTime: 2021-07-23 09:18:40
  * @detail: 
  * @change: 
 -->
@@ -31,16 +31,6 @@
             <a-button :type="itme.bustype" @click="SubmitForm(itme)">{{itme.label}}</a-button>
          </template>
       </a-col>
-      <!-- <a-col :md="!advanced && 8 || 24" :sm="24">
-        <span class="table-page-search-submitButtons" :style="advanced && { float: 'right', overflow: 'hidden' } || {} ">
-          <a-button type="primary" @click="SubmitForm">查询</a-button>
-          <a-button style="margin-left: 8px" @click="resetForm">重置</a-button>
-          <a @click="toggleAdvanced" style="margin-left: 8px">
-            {{ advanced ? '收起' : '展开' }}
-            <a-icon :type="advanced ? 'up' : 'down'"/>
-          </a>
-        </span>
-      </a-col> -->
     </a-row>
   </a-form>
 </template>
@@ -78,10 +68,6 @@ export default defineComponent({
     const labelCol = { lg: { span: 5 }, sm: { span: 5 }}
     const wrapperCol = { lg: { span: 19 }, sm: { span: 19 }}
     const router = useRouter();
-    // const advanced = ref<Boolean>(false)
-    // const toggleAdvanced = () => {
-    //   advanced.value = !advanced.value
-    // }
     interface stateType {
       formState:any
     }
@@ -104,7 +90,7 @@ export default defineComponent({
           message.success('新增成功')
           setTimeout(() => {
             router.go(-1)
-          }, 1000);
+          }, 2000);
         })
       }).catch(() => {
         console.log('error', '表单验证失败');
@@ -116,9 +102,6 @@ export default defineComponent({
       ...toRaw(state),
       labelCol,
       wrapperCol, 
-      // advanced, 
-      // toggleAdvanced,
-      // resetForm,
       formRef,
       SubmitForm
     }

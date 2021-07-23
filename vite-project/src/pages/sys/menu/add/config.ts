@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-16 09:39:20
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-21 17:44:56
+ * @LastEditTime: 2021-07-23 11:02:31
  * @detail: 
  * @change: 
  */
@@ -73,17 +73,17 @@ const PageConfig = reactive({
           { required: true, message: '请选择菜单图标',trigger: 'change' }
         ]
       },
-			{
-			  type: 'hUeditor',
-			  key: 'Ueditor',
-			  label: '富文本',
-			  value: '', 
-			  placeholder: '',
-			  disabled: true,
-			  required:false,
-			  rules: [
-			  ]
-			},
+			// {
+			//   type: 'hUeditor',
+			//   key: 'Ueditor',
+			//   label: '富文本',
+			//   value: '', 
+			//   placeholder: '',
+			//   disabled: true,
+			//   required:false,
+			//   rules: [
+			//   ]
+			// },
       {
         type: 'hInput',
         key: 'menuPath',
@@ -135,14 +135,12 @@ const PageConfig = reactive({
             value: "",
             label: "请选择",
             key: "state",
-            children: [],
           }
         ],
         query: {
           url: '/api/sys/getPlateAllMenu',
           method: 'post'
-        },
-        rules: []
+        }
       },
     ]
   }
