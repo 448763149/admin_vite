@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-15 15:24:08
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-21 14:58:06
+ * @LastEditTime: 2021-07-22 17:41:24
  * @detail: 
  * @change: 
  */
@@ -113,3 +113,42 @@ export function getParent(router:any[], path:string) {
   };  
   return true  
 }; 
+
+
+
+
+/**
+ * 根据规则生成树结构
+ * @param  {Array} arr 需要遍历的数组
+ * @return {Boolean} 返回当前
+ * @Autor HuQiang 2021-5-11 15:17
+ */
+export function turnToTreeOfManyRootPlus(arr:any[]) {
+  var arrs:any = []
+  arr.forEach(item => {
+    if (item.parent_id == '0') {
+      arrs.push(item)
+    }
+  })
+
+  return arr.reduce((h, m) => {
+    console.log(arr)
+    if (m.parent_id != '0') {
+      foo(h, m)
+    }
+    function foo(arr:any[], cur:any) {
+      arr.forEach(item => {
+        if (item.menu_id === cur.parent_id) {
+          if (!item.children) {
+            item.children = []
+          }
+          item.children.push(cur)
+        } else if (item.children) {
+          foo(item.children, cur)
+        }
+      })
+    }
+
+    return h
+  }, arrs)
+}
