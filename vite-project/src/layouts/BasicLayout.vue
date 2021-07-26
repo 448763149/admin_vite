@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-10 11:12:23
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-13 10:23:07
+ * @LastEditTime: 2021-07-23 14:58:39
  * @detail: 
  * @change: 
 -->
@@ -119,12 +119,12 @@ export default defineComponent({
     // )
     onMounted(() => {
       const getRouter:any = localStorage.getItem("getRouter");
-      if(router.currentRoute.value.path === getRouter){
-        curRoute.value = [getRouter]
-      }else{
-        curRoute.value = [router.currentRoute.value.path]
-        localStorage.setItem("getRouter", router.currentRoute.value.path);
-      }
+      // if(router.currentRoute.value.path === getRouter){
+      curRoute.value = [getRouter]
+      // }else{
+        // curRoute.value = [router.currentRoute.value.path]
+        // localStorage.setItem("getRouter", router.currentRoute.value.path);
+      // }
     })
    
     return {

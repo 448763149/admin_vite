@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-09 09:37:09
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-19 11:58:13
+ * @LastEditTime: 2021-07-23 16:04:49
  * @detail: 
  * @change: 
  */
@@ -67,8 +67,7 @@ const constantRouters: Array<RouteRecordRaw> = [
     ]
   },
   {
-    // path: '/:pathMatch(.*)*',
-    path: '/404',
+    path: '/:pathMatch(.*)*',
     name: '404',
     meta: { title: '404' },
     component: () => import(/* webpackChunkName: "fail" */ '@/pages/404.vue')

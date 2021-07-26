@@ -4,7 +4,7 @@
  * @Autor: HuQiang
  * @Date: 2021-06-15 15:24:08
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-07-22 17:41:24
+ * @LastEditTime: 2021-07-23 15:02:30
  * @detail: 
  * @change: 
  */
@@ -72,7 +72,7 @@ export function getParent(router:any[], path:string) {
 /**
  * @param  {Array} router 路由数组
  * @param  {string} path 需要匹配的路由路径
- * @return {Boolean} 返回当前
+ * @return {Boolean} 返回当前路由是否存在在导航中如果不存在，证明他是最后一级路由
  * @Autor HuQiang 2021-5-11 15:17
  */
  export function getisRoute(router:any[], path:string) {
@@ -148,7 +148,6 @@ export function turnToTreeOfManyRootPlus(arr:any[]) {
         }
       })
     }
-
     return h
   }, arrs)
 }

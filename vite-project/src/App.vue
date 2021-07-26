@@ -4,14 +4,14 @@
  * @Autor: HuQiang
  * @Date: 2021-06-08 16:41:00
  * @LastEditors: HuQiang
- * @LastEditTime: 2021-06-16 12:52:02
+ * @LastEditTime: 2021-07-23 16:18:44
  * @detail: 
  * @change: 
 -->
 <template>
   <a-config-provider :locale="locale">
     <suspense>
-     <router-view />
+     <router-view  />
     </suspense>
   </a-config-provider>
 </template>
@@ -27,7 +27,8 @@ export default defineComponent({
   },
   data() {
     return {
-      locale: zhCN
+      locale: zhCN,
+      kkk:false
     }
   }
 })
