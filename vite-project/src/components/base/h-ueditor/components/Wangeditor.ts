@@ -1,7 +1,7 @@
 import { onMounted, onBeforeUnmount, ref, watch } from 'vue';
 // 引入wangeditor组件
 import WangEditor from 'wangeditor';
- 
+import {mixins} from '@/mixins'
 export default {
   name: 'Wangeditor',
   setup(props: any, content: any) {
@@ -66,7 +66,14 @@ export default {
       ];
       
       // 开启本地上传图片(这是后端上传链接)
-      instance.config.uploadImgServer = '/upload-img';
+      instance.config.uploadImgServer = '/api/base/upload';
+      instance.config.uploadFileName = 'fileData';
+      instance.config.uploadImgHooks = {
+        customInsert: function (insertImg:any, result:any) {
+          var url = mixins.imgUrl+result.data.imgUrl
+        insertImg(url)
+        }
+    };
       // 限制上传图片格式
       instance.config.uploadImgAccept = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
       // 开启本地上传视频(这是后端上传链接)
